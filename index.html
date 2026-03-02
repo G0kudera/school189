@@ -3,93 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Кружок программирования Школы №189 — учимся создавать игры на Python и Pygame. Практические курсы для школьников с нуля до собственного проекта.">
 <title>Кружок программирования — Школа №189</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
-:root {
-  --bg: #0a0e17;
-  --surface: #12182b;
-  --card: #1a2339;
-  --border: #2a3654;
-  --accent: #4f7cff;
-  --accent-bright: #6b94ff;
-  --gold: #ffa94d;
-  --green: #51cf66;
-  --text: #e9ecf5;
-  --text-dim: #8897b8;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Manrope', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-/* Background effects */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(79,124,255,0.15) 0%, transparent 60%),
-    radial-gradient(circle at 85% 90%, rgba(255,169,77,0.08) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Navigation */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10,14,23,0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  z-index: 1000;
-  padding: 0 32px;
-}
-
-.nav-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--accent-bright);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover {
-  color: var(--text);
-}
-
 /* Hero Section */
 .hero {
   position: relative;
@@ -145,39 +66,6 @@ h1 {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-}
-
-.btn {
-  padding: 14px 32px;
-  border-radius: 12px;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  transition: all 0.2s;
-  border: none;
-  cursor: pointer;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--accent-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(79,124,255,0.3);
-}
-
-.btn-secondary {
-  background: var(--surface);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-  border-color: var(--accent);
-  background: var(--card);
 }
 
 /* Stats Grid */
@@ -338,9 +226,7 @@ h1 {
   flex-shrink: 0;
 }
 
-.course-content {
-  flex: 1;
-}
+.course-content { flex: 1; }
 
 .course-title {
   font-size: 28px;
@@ -369,112 +255,32 @@ h1 {
   line-height: 1.8;
 }
 
-/* Footer */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 60px 32px;
-  text-align: center;
-  background: var(--surface);
-  position: relative;
-  z-index: 1;
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent-bright);
-  margin-bottom: 16px;
-}
-
-.footer-text {
-  color: var(--text-dim);
-  font-size: 15px;
-  margin-bottom: 32px;
-}
-
-.footer-links {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
-.footer-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 500;
-  transition: color 0.2s;
-}
-
-.footer-links a:hover {
-  color: var(--accent-bright);
-}
-
-.copyright {
-  margin-top: 32px;
-  padding-top: 32px;
-  border-top: 1px solid var(--border);
-  color: var(--text-dim);
-  font-size: 14px;
-}
+.hero-content > * { animation: fadeInUp 0.8s ease backwards; }
+.hero-badge    { animation-delay: 0.1s; }
+h1             { animation-delay: 0.2s; }
+.hero-desc     { animation-delay: 0.3s; }
+.cta-buttons   { animation-delay: 0.4s; }
+.stats         { animation-delay: 0.5s; }
 
 /* Responsive */
 @media (max-width: 768px) {
-  .nav-content {
-    padding: 0 16px;
-  }
-  
-  .nav-links {
-    gap: 20px;
-    font-size: 14px;
-  }
-  
-  .hero {
-    padding: 120px 20px 80px;
-  }
-  
-  .section {
-    padding: 80px 20px;
-  }
-  
+  .hero { padding: 120px 20px 80px; }
+  .section { padding: 80px 20px; }
+
   .course-card {
     flex-direction: column;
     text-align: center;
     padding: 32px 24px;
   }
-  
-  .course-number {
-    font-size: 56px;
-  }
-}
 
-/* Animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  .course-number { font-size: 56px; }
 }
-
-.hero-content > * {
-  animation: fadeInUp 0.8s ease backwards;
-}
-
-.hero-badge { animation-delay: 0.1s; }
-h1 { animation-delay: 0.2s; }
-.hero-desc { animation-delay: 0.3s; }
-.cta-buttons { animation-delay: 0.4s; }
-.stats { animation-delay: 0.5s; }
 </style>
 </head>
 <body>
@@ -483,6 +289,9 @@ h1 { animation-delay: 0.2s; }
 <nav>
   <div class="nav-content">
     <a href="index.html" class="logo">ШКОЛА №189</a>
+    <button class="nav-burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="#about">О кружке</a></li>
       <li><a href="courses.html">Курсы</a></li>
@@ -592,8 +401,6 @@ h1 { animation-delay: 0.2s; }
         </p>
       </div>
     </a>
-
-    <!-- Можно добавить больше курсов -->
   </div>
 </section>
 
@@ -615,5 +422,6 @@ h1 { animation-delay: 0.2s; }
   </div>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>

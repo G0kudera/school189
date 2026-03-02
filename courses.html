@@ -3,133 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Мини-курсы кружка программирования Школы №189 — Pygame, Telegram-боты и другие практические курсы по Python для школьников.">
 <title>Мини-курсы — Школа №189</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
-:root {
-  --bg: #0a0e17;
-  --surface: #12182b;
-  --card: #1a2339;
-  --border: #2a3654;
-  --accent: #4f7cff;
-  --accent-bright: #6b94ff;
-  --gold: #ffa94d;
-  --green: #51cf66;
-  --purple: #9775fa;
-  --text: #e9ecf5;
-  --text-dim: #8897b8;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Manrope', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: 
-    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(79,124,255,0.15) 0%, transparent 60%),
-    radial-gradient(circle at 85% 90%, rgba(255,169,77,0.08) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Navigation */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10,14,23,0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  z-index: 1000;
-  padding: 0 32px;
-}
-
-.nav-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--accent-bright);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--text);
-}
-
-/* Page Header */
-.page-header {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 140px 32px 80px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.page-badge {
-  display: inline-block;
-  background: rgba(81,207,102,0.1);
-  color: var(--green);
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: clamp(40px, 6vw, 64px);
-  font-weight: 800;
-  margin-bottom: 20px;
-  letter-spacing: -2px;
-}
-
-.page-desc {
-  font-size: 20px;
-  color: var(--text-dim);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
-}
-
-/* Courses Grid */
+/* Courses List */
 .courses-section {
   max-width: 1200px;
   margin: 0 auto;
@@ -156,6 +38,12 @@ nav {
   box-shadow: 0 16px 48px rgba(0,0,0,0.4);
 }
 
+/* Disabled / coming-soon course */
+.course-item--disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
 .course-header {
   display: flex;
   gap: 32px;
@@ -174,9 +62,7 @@ nav {
   flex-shrink: 0;
 }
 
-.course-info {
-  flex: 1;
-}
+.course-info { flex: 1; }
 
 .course-status {
   display: inline-block;
@@ -254,102 +140,27 @@ nav {
   border-top: 1px solid var(--border);
 }
 
-.btn {
-  padding: 12px 28px;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  text-decoration: none;
-  transition: all 0.2s;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: white;
-}
-
-.btn-primary:hover {
-  background: var(--accent-bright);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  background: transparent;
-  color: var(--text-dim);
-  border: 1px solid var(--border);
-}
-
-.btn-secondary:hover {
-  color: var(--text);
-  border-color: var(--accent);
-}
-
-/* Footer */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 60px 32px;
-  text-align: center;
-  background: var(--surface);
-  position: relative;
-  z-index: 1;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent-bright);
-  margin-bottom: 16px;
-}
-
-.footer-text {
-  color: var(--text-dim);
-  font-size: 15px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
-  .page-header {
-    padding: 120px 20px 60px;
-  }
-  
-  .courses-section {
-    padding: 0 20px 80px;
-  }
-  
-  .course-item {
-    padding: 32px 24px;
-  }
-  
+  .courses-section { padding: 0 20px 80px; }
+
+  .course-item { padding: 32px 24px; }
+
   .course-header {
     flex-direction: column;
     gap: 20px;
   }
-  
-  .course-number {
-    font-size: 56px;
-  }
-  
-  .course-title {
-    font-size: 28px;
-  }
-  
+
+  .course-number { font-size: 56px; }
+  .course-title  { font-size: 28px; }
+
   .course-footer {
     flex-direction: column;
     gap: 16px;
     align-items: stretch;
   }
-  
-  .btn {
-    justify-content: center;
-  }
+
+  .btn { justify-content: center; }
 }
 </style>
 </head>
@@ -359,9 +170,12 @@ footer {
 <nav>
   <div class="nav-content">
     <a href="index.html" class="logo">ШКОЛА №189</a>
+    <button class="nav-burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="index.html#about">О кружке</a></li>
-      <li><a href="courses.html" class="active">Курсы</a></li>
+      <li><a href="courses.html">Курсы</a></li>
       <li><a href="projects.html">Проекты</a></li>
       <li><a href="index.html#contact">Контакты</a></li>
     </ul>
@@ -370,7 +184,7 @@ footer {
 
 <!-- Page Header -->
 <section class="page-header">
-  <div class="page-badge">Мини-курсы</div>
+  <div class="page-badge page-badge--green">Мини-курсы</div>
   <h1 class="page-title">Наши программы обучения</h1>
   <p class="page-desc">
     Интенсивные курсы с практикой, реальными проектами и презентациями
@@ -379,7 +193,7 @@ footer {
 
 <!-- Courses List -->
 <section class="courses-section">
-  
+
   <!-- Course 1: Pygame -->
   <a href="pygame-course.html" class="course-item">
     <div class="course-header">
@@ -394,13 +208,13 @@ footer {
         </div>
       </div>
     </div>
-    
+
     <p class="course-description">
-      За 4 дня создаём полноценную игру на Pygame. Изучаем основы игровой разработки: 
-      графику, звук, управление, коллизии, спрайты и анимации. Каждый ученик делает 
+      За 4 дня создаём полноценную игру на Pygame. Изучаем основы игровой разработки:
+      графику, звук, управление, коллизии, спрайты и анимации. Каждый ученик делает
       собственную игру и презентует её классу в финале курса.
     </p>
-    
+
     <div class="course-topics">
       <span class="topic-tag">pygame.init()</span>
       <span class="topic-tag">event.get()</span>
@@ -409,17 +223,15 @@ footer {
       <span class="topic-tag">rect.colliderect()</span>
       <span class="topic-tag">image.load()</span>
     </div>
-    
+
     <div class="course-footer">
       <div class="meta-item">💻 Python + Pygame</div>
-      <div class="btn btn-primary">
-        Открыть программу →
-      </div>
+      <div class="btn btn-primary">Открыть программу →</div>
     </div>
   </a>
 
-  <!-- Course 2: Coming Soon Example -->
-  <div class="course-item" style="opacity: 0.6; pointer-events: none;">
+  <!-- Course 2: Coming Soon -->
+  <div class="course-item course-item--disabled">
     <div class="course-header">
       <div class="course-number">02</div>
       <div class="course-info">
@@ -432,13 +244,13 @@ footer {
         </div>
       </div>
     </div>
-    
+
     <p class="course-description">
-      Создаём полезных Telegram ботов с использованием python-telegram-bot. Учимся 
-      работать с API, базами данных, обрабатывать команды и сообщения. Итоговый 
+      Создаём полезных Telegram ботов с использованием aiogram. Учимся
+      работать с API, базами данных, обрабатывать команды и сообщения. Итоговый
       проект — бот-помощник с уникальным функционалом.
     </p>
-    
+
     <div class="course-topics">
       <span class="topic-tag">aiogram</span>
       <span class="topic-tag">handlers</span>
@@ -446,12 +258,10 @@ footer {
       <span class="topic-tag">SQLite</span>
       <span class="topic-tag">async/await</span>
     </div>
-    
+
     <div class="course-footer">
       <div class="meta-item">🐍 Python + API</div>
-      <div class="btn btn-secondary">
-        В разработке
-      </div>
+      <div class="btn btn-secondary">В разработке</div>
     </div>
   </div>
 
@@ -464,8 +274,18 @@ footer {
     <p class="footer-text">
       Кружок программирования • Python + Pygame • 2025–2026
     </p>
+    <ul class="footer-links">
+      <li><a href="courses.html">Курсы</a></li>
+      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="index.html#about">О кружке</a></li>
+      <li><a href="index.html#contact">Контакты</a></li>
+    </ul>
+    <div class="copyright">
+      © 2025 Школа №189. Все права защищены.
+    </div>
   </div>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>
