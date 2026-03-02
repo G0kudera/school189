@@ -3,131 +3,19 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Проекты учеников кружка программирования Школы №189 — игры на Pygame, созданные школьниками во время прохождения курсов.">
 <title>Проекты учеников — Школа №189</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
-
-:root {
-  --bg: #0a0e17;
-  --surface: #12182b;
-  --card: #1a2339;
-  --border: #2a3654;
-  --accent: #4f7cff;
-  --accent-bright: #6b94ff;
-  --gold: #ffa94d;
-  --green: #51cf66;
-  --purple: #9775fa;
-  --pink: #ff6b9d;
-  --text: #e9ecf5;
-  --text-dim: #8897b8;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'Manrope', sans-serif;
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
+/* Override background accent for this page */
 body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background: 
+  background:
     radial-gradient(ellipse 70% 50% at 50% -20%, rgba(79,124,255,0.15) 0%, transparent 60%),
     radial-gradient(circle at 15% 80%, rgba(255,107,157,0.08) 0%, transparent 50%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Navigation */
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  background: rgba(10,14,23,0.85);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border);
-  z-index: 1000;
-  padding: 0 32px;
-}
-
-.nav-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 70px;
-}
-
-.logo {
-  font-weight: 800;
-  font-size: 18px;
-  color: var(--accent-bright);
-  text-decoration: none;
-  letter-spacing: -0.5px;
-}
-
-.nav-links {
-  display: flex;
-  gap: 32px;
-  list-style: none;
-}
-
-.nav-links a {
-  color: var(--text-dim);
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 15px;
-  transition: color 0.2s;
-}
-
-.nav-links a:hover,
-.nav-links a.active {
-  color: var(--text);
-}
-
-/* Page Header */
-.page-header {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 140px 32px 80px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.page-badge {
-  display: inline-block;
-  background: rgba(255,107,157,0.15);
-  color: var(--pink);
-  padding: 8px 20px;
-  border-radius: 100px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  margin-bottom: 24px;
-}
-
-.page-title {
-  font-size: clamp(40px, 6vw, 64px);
-  font-weight: 800;
-  margin-bottom: 20px;
-  letter-spacing: -2px;
-}
-
-.page-desc {
-  font-size: 20px;
-  color: var(--text-dim);
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.7;
 }
 
 /* Projects Grid */
@@ -151,7 +39,6 @@ nav {
   border-radius: 20px;
   overflow: hidden;
   transition: all 0.3s;
-  cursor: pointer;
 }
 
 .project-card:hover {
@@ -177,19 +64,16 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: 
-    linear-gradient(45deg, transparent 30%, rgba(79,124,255,0.1) 50%, transparent 70%);
+  background: linear-gradient(45deg, transparent 30%, rgba(79,124,255,0.1) 50%, transparent 70%);
   animation: shimmer 3s infinite;
 }
 
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
+  0%   { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
 
-.project-content {
-  padding: 28px;
-}
+.project-content { padding: 28px; }
 
 .project-header {
   display: flex;
@@ -274,21 +158,6 @@ nav {
   font-weight: 600;
 }
 
-.view-code {
-  font-size: 13px;
-  color: var(--accent-bright);
-  font-weight: 600;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.2s;
-}
-
-.view-code:hover {
-  gap: 10px;
-}
-
 /* Empty State */
 .empty-state {
   text-align: center;
@@ -296,7 +165,7 @@ nav {
   background: var(--surface);
   border: 2px dashed var(--border);
   border-radius: 20px;
-  margin-top: 40px;
+  margin-top: 60px;
 }
 
 .empty-icon {
@@ -317,46 +186,10 @@ nav {
   font-size: 16px;
 }
 
-/* Footer */
-footer {
-  border-top: 1px solid var(--border);
-  padding: 60px 32px;
-  text-align: center;
-  background: var(--surface);
-  position: relative;
-  z-index: 1;
-}
-
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent-bright);
-  margin-bottom: 16px;
-}
-
-.footer-text {
-  color: var(--text-dim);
-  font-size: 15px;
-}
-
 /* Responsive */
 @media (max-width: 768px) {
-  .page-header {
-    padding: 120px 20px 60px;
-  }
-  
-  .projects-section {
-    padding: 0 20px 80px;
-  }
-  
-  .projects-grid {
-    grid-template-columns: 1fr;
-  }
+  .projects-section { padding: 0 20px 80px; }
+  .projects-grid { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -366,10 +199,13 @@ footer {
 <nav>
   <div class="nav-content">
     <a href="index.html" class="logo">ШКОЛА №189</a>
+    <button class="nav-burger" aria-label="Меню">
+      <span></span><span></span><span></span>
+    </button>
     <ul class="nav-links">
       <li><a href="index.html#about">О кружке</a></li>
       <li><a href="courses.html">Курсы</a></li>
-      <li><a href="projects.html" class="active">Проекты</a></li>
+      <li><a href="projects.html">Проекты</a></li>
       <li><a href="index.html#contact">Контакты</a></li>
     </ul>
   </div>
@@ -377,7 +213,7 @@ footer {
 
 <!-- Page Header -->
 <section class="page-header">
-  <div class="page-badge">Проекты учеников</div>
+  <div class="page-badge page-badge--pink">Проекты учеников</div>
   <h1 class="page-title">Что создали наши ученики</h1>
   <p class="page-desc">
     Реальные проекты, созданные учениками во время прохождения курсов
@@ -386,9 +222,10 @@ footer {
 
 <!-- Projects Grid -->
 <section class="projects-section">
+
+  <!-- Placeholder cards shown until real projects are added -->
   <div class="projects-grid">
-    
-    <!-- Project 1 - Example -->
+
     <div class="project-card">
       <div class="project-thumbnail">🚀</div>
       <div class="project-content">
@@ -400,7 +237,7 @@ footer {
           <div class="project-badge badge-pygame">Pygame</div>
         </div>
         <p class="project-desc">
-          Игра в стиле endless runner с космической тематикой. Игрок управляет 
+          Игра в стиле endless runner с космической тематикой. Игрок управляет
           космическим кораблём, уворачиваясь от астероидов и собирая бонусы.
         </p>
         <div class="project-tags">
@@ -410,12 +247,11 @@ footer {
         </div>
         <div class="project-footer">
           <span class="project-date">Декабрь 2025</span>
-          <a href="#" class="view-code">Посмотреть →</a>
+          <span style="font-size:13px;color:var(--text-dim);font-style:italic;">Пример проекта</span>
         </div>
       </div>
     </div>
 
-    <!-- Project 2 - Example -->
     <div class="project-card">
       <div class="project-thumbnail">🎯</div>
       <div class="project-content">
@@ -427,7 +263,7 @@ footer {
           <div class="project-badge badge-pygame">Pygame</div>
         </div>
         <p class="project-desc">
-          Игра на выживание с зомби-тематикой. Враги появляются волнами с 
+          Игра на выживание с зомби-тематикой. Враги появляются волнами с
           увеличивающейся сложностью. Есть система апгрейдов и рекордов.
         </p>
         <div class="project-tags">
@@ -437,12 +273,11 @@ footer {
         </div>
         <div class="project-footer">
           <span class="project-date">Январь 2026</span>
-          <a href="#" class="view-code">Посмотреть →</a>
+          <span style="font-size:13px;color:var(--text-dim);font-style:italic;">Пример проекта</span>
         </div>
       </div>
     </div>
 
-    <!-- Project 3 - Example -->
     <div class="project-card">
       <div class="project-thumbnail">🌟</div>
       <div class="project-content">
@@ -454,7 +289,7 @@ footer {
           <div class="project-badge badge-pygame">Pygame</div>
         </div>
         <p class="project-desc">
-          Аркада где нужно собирать падающие звёзды и избегать чёрных дыр. 
+          Аркада где нужно собирать падающие звёзды и избегать чёрных дыр.
           Добавлены powerup'ы и система жизней с красивой анимацией.
         </p>
         <div class="project-tags">
@@ -464,15 +299,14 @@ footer {
         </div>
         <div class="project-footer">
           <span class="project-date">Январь 2026</span>
-          <a href="#" class="view-code">Посмотреть →</a>
+          <span style="font-size:13px;color:var(--text-dim);font-style:italic;">Пример проекта</span>
         </div>
       </div>
     </div>
 
   </div>
 
-  <!-- Empty state для будущих проектов -->
-  <div class="empty-state" style="margin-top: 60px;">
+  <div class="empty-state">
     <div class="empty-icon">💡</div>
     <h3 class="empty-title">Твой проект может быть здесь!</h3>
     <p class="empty-text">
@@ -488,8 +322,18 @@ footer {
     <p class="footer-text">
       Кружок программирования • Python + Pygame • 2025–2026
     </p>
+    <ul class="footer-links">
+      <li><a href="courses.html">Курсы</a></li>
+      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="index.html#about">О кружке</a></li>
+      <li><a href="index.html#contact">Контакты</a></li>
+    </ul>
+    <div class="copyright">
+      © 2025 Школа №189. Все права защищены.
+    </div>
   </div>
 </footer>
 
+<script src="main.js"></script>
 </body>
 </html>
