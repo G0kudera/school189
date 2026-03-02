@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мини-курсы — Школа №189</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0a0e17;
+  --surface: #12182b;
+  --card: #1a2339;
+  --border: #2a3654;
+  --accent: #4f7cff;
+  --accent-bright: #6b94ff;
+  --gold: #ffa94d;
+  --green: #51cf66;
+  --purple: #9775fa;
+  --text: #e9ecf5;
+  --text-dim: #8897b8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(79,124,255,0.15) 0%, transparent 60%),
+    radial-gradient(circle at 85% 90%, rgba(255,169,77,0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10,14,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  padding: 0 32px;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--accent-bright);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--text);
+}
+
+/* Page Header */
+.page-header {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 32px 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.page-badge {
+  display: inline-block;
+  background: rgba(81,207,102,0.1);
+  color: var(--green);
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.page-title {
+  font-size: clamp(40px, 6vw, 64px);
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -2px;
+}
+
+.page-desc {
+  font-size: 20px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.7;
+}
+
+/* Courses Grid */
+.courses-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+  position: relative;
+  z-index: 1;
+}
+
+.course-item {
+  background: linear-gradient(135deg, var(--surface), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 48px;
+  margin-bottom: 32px;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.course-item:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+}
+
+.course-header {
+  display: flex;
+  gap: 32px;
+  align-items: flex-start;
+  margin-bottom: 32px;
+}
+
+.course-number {
+  font-size: 80px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.course-info {
+  flex: 1;
+}
+
+.course-status {
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin-bottom: 16px;
+}
+
+.status-active {
+  background: rgba(81,207,102,0.15);
+  color: var(--green);
+}
+
+.status-upcoming {
+  background: rgba(255,169,77,0.15);
+  color: var(--gold);
+}
+
+.course-title {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.course-meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.course-description {
+  color: var(--text-dim);
+  font-size: 18px;
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.course-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.topic-tag {
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.course-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.btn {
+  padding: 12px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  color: var(--text);
+  border-color: var(--accent);
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 32px;
+  text-align: center;
+  background: var(--surface);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-bright);
+  margin-bottom: 16px;
+}
+
+.footer-text {
+  color: var(--text-dim);
+  font-size: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .page-header {
+    padding: 120px 20px 60px;
+  }
+  
+  .courses-section {
+    padding: 0 20px 80px;
+  }
+  
+  .course-item {
+    padding: 32px 24px;
+  }
+  
+  .course-header {
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .course-number {
+    font-size: 56px;
+  }
+  
+  .course-title {
+    font-size: 28px;
+  }
+  
+  .course-footer {
+    flex-direction: column;
+    gap: 16px;
+    align-items: stretch;
+  }
+  
+  .btn {
+    justify-content: center;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-content">
+    <a href="index.html" class="logo">ШКОЛА №189</a>
+    <ul class="nav-links">
+      <li><a href="index.html#about">О кружке</a></li>
+      <li><a href="courses.html" class="active">Курсы</a></li>
+      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="index.html#contact">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Page Header -->
+<section class="page-header">
+  <div class="page-badge">Мини-курсы</div>
+  <h1 class="page-title">Наши программы обучения</h1>
+  <p class="page-desc">
+    Интенсивные курсы с практикой, реальными проектами и презентациями
+  </p>
+</section>
+
+<!-- Courses List -->
+<section class="courses-section">
+  
+  <!-- Course 1: Pygame -->
+  <a href="pygame-course.html" class="course-item">
+    <div class="course-header">
+      <div class="course-number">01</div>
+      <div class="course-info">
+        <div class="course-status status-active">Активный курс</div>
+        <h2 class="course-title">Pygame Mini-Курс</h2>
+        <div class="course-meta">
+          <span class="meta-item">⏱ 4 дня · 8 уроков</span>
+          <span class="meta-item">📊 Начинающий</span>
+          <span class="meta-item">🎯 Space Dodger</span>
+        </div>
+      </div>
+    </div>
+    
+    <p class="course-description">
+      За 4 дня создаём полноценную игру на Pygame. Изучаем основы игровой разработки: 
+      графику, звук, управление, коллизии, спрайты и анимации. Каждый ученик делает 
+      собственную игру и презентует её классу в финале курса.
+    </p>
+    
+    <div class="course-topics">
+      <span class="topic-tag">pygame.init()</span>
+      <span class="topic-tag">event.get()</span>
+      <span class="topic-tag">sprite.Group()</span>
+      <span class="topic-tag">mixer.Sound()</span>
+      <span class="topic-tag">rect.colliderect()</span>
+      <span class="topic-tag">image.load()</span>
+    </div>
+    
+    <div class="course-footer">
+      <div class="meta-item">💻 Python + Pygame</div>
+      <div class="btn btn-primary">
+        Открыть программу →
+      </div>
+    </div>
+  </a>
+
+  <!-- Course 2: Coming Soon Example -->
+  <div class="course-item" style="opacity: 0.6; pointer-events: none;">
+    <div class="course-header">
+      <div class="course-number">02</div>
+      <div class="course-info">
+        <div class="course-status status-upcoming">Скоро</div>
+        <h2 class="course-title">Telegram Боты на Python</h2>
+        <div class="course-meta">
+          <span class="meta-item">⏱ 5 дней · 10 уроков</span>
+          <span class="meta-item">📊 Средний</span>
+          <span class="meta-item">🤖 Свой бот</span>
+        </div>
+      </div>
+    </div>
+    
+    <p class="course-description">
+      Создаём полезных Telegram ботов с использованием python-telegram-bot. Учимся 
+      работать с API, базами данных, обрабатывать команды и сообщения. Итоговый 
+      проект — бот-помощник с уникальным функционалом.
+    </p>
+    
+    <div class="course-topics">
+      <span class="topic-tag">aiogram</span>
+      <span class="topic-tag">handlers</span>
+      <span class="topic-tag">keyboards</span>
+      <span class="topic-tag">SQLite</span>
+      <span class="topic-tag">async/await</span>
+    </div>
+    
+    <div class="course-footer">
+      <div class="meta-item">🐍 Python + API</div>
+      <div class="btn btn-secondary">
+        В разработке
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-logo">ШКОЛА №189</div>
+    <p class="footer-text">
+      Кружок программирования • Python + Pygame • 2025–2026
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Кружок программирования — Школа №189</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap');
+
+:root {
+  --bg: #0a0e17;
+  --surface: #12182b;
+  --card: #1a2339;
+  --border: #2a3654;
+  --accent: #4f7cff;
+  --accent-bright: #6b94ff;
+  --gold: #ffa94d;
+  --green: #51cf66;
+  --text: #e9ecf5;
+  --text-dim: #8897b8;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Manrope', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Background effects */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: 
+    radial-gradient(ellipse 70% 50% at 50% -20%, rgba(79,124,255,0.15) 0%, transparent 60%),
+    radial-gradient(circle at 85% 90%, rgba(255,169,77,0.08) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: rgba(10,14,23,0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  padding: 0 32px;
+}
+
+.nav-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  font-weight: 800;
+  font-size: 18px;
+  color: var(--accent-bright);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 15px;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--text);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 140px 32px 100px;
+  z-index: 1;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(79,124,255,0.1);
+  border: 1px solid rgba(79,124,255,0.3);
+  color: var(--accent-bright);
+  padding: 8px 16px;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  letter-spacing: 0.3px;
+}
+
+h1 {
+  font-size: clamp(36px, 6vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 24px;
+  letter-spacing: -2px;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent-bright), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero-desc {
+  font-size: 20px;
+  color: var(--text-dim);
+  margin-bottom: 40px;
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.cta-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  padding: 14px 32px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: white;
+}
+
+.btn-primary:hover {
+  background: var(--accent-bright);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(79,124,255,0.3);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+  background: var(--card);
+}
+
+/* Stats Grid */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+  margin-top: 80px;
+}
+
+.stat-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  text-align: center;
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+}
+
+.stat-number {
+  font-size: 36px;
+  font-weight: 800;
+  color: var(--accent-bright);
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* About Section */
+.section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 100px 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.section-tag {
+  display: inline-block;
+  background: rgba(81,207,102,0.1);
+  color: var(--green);
+  padding: 6px 16px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: clamp(32px, 5vw, 48px);
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.section-desc {
+  font-size: 18px;
+  color: var(--text-dim);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Cards Grid */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  transition: all 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+
+.card-icon {
+  width: 56px;
+  height: 56px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-bright));
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.card-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.card-text {
+  color: var(--text-dim);
+  line-height: 1.7;
+}
+
+/* Courses Preview */
+.courses-preview {
+  display: grid;
+  gap: 32px;
+}
+
+.course-card {
+  background: linear-gradient(135deg, var(--surface), var(--card));
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  transition: all 0.3s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.course-card:hover {
+  transform: translateX(8px);
+  border-color: var(--accent);
+}
+
+.course-number {
+  font-size: 72px;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--gold));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.course-content {
+  flex: 1;
+}
+
+.course-title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.course-meta {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.course-meta-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  color: var(--text-dim);
+  font-weight: 600;
+}
+
+.course-desc {
+  color: var(--text-dim);
+  line-height: 1.8;
+}
+
+/* Footer */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 60px 32px;
+  text-align: center;
+  background: var(--surface);
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-logo {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--accent-bright);
+  margin-bottom: 16px;
+}
+
+.footer-text {
+  color: var(--text-dim);
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  list-style: none;
+  flex-wrap: wrap;
+}
+
+.footer-links a {
+  color: var(--text-dim);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover {
+  color: var(--accent-bright);
+}
+
+.copyright {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  color: var(--text-dim);
+  font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-content {
+    padding: 0 16px;
+  }
+  
+  .nav-links {
+    gap: 20px;
+    font-size: 14px;
+  }
+  
+  .hero {
+    padding: 120px 20px 80px;
+  }
+  
+  .section {
+    padding: 80px 20px;
+  }
+  
+  .course-card {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 24px;
+  }
+  
+  .course-number {
+    font-size: 56px;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-content > * {
+  animation: fadeInUp 0.8s ease backwards;
+}
+
+.hero-badge { animation-delay: 0.1s; }
+h1 { animation-delay: 0.2s; }
+.hero-desc { animation-delay: 0.3s; }
+.cta-buttons { animation-delay: 0.4s; }
+.stats { animation-delay: 0.5s; }
+</style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+  <div class="nav-content">
+    <a href="index.html" class="logo">ШКОЛА №189</a>
+    <ul class="nav-links">
+      <li><a href="#about">О кружке</a></li>
+      <li><a href="courses.html">Курсы</a></li>
+      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="#contact">Контакты</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">
+      🎓 Кружок программирования
+    </div>
+    <h1>
+      Создаём игры и учимся <span class="gradient-text">программировать</span>
+    </h1>
+    <p class="hero-desc">
+      Практический курс по Python и разработке игр для школьников. От первых строк кода до собственных проектов.
+    </p>
+    <div class="cta-buttons">
+      <a href="courses.html" class="btn btn-primary">Смотреть курсы</a>
+      <a href="projects.html" class="btn btn-secondary">Проекты учеников</a>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-number">4</div>
+      <div class="stat-label">Дня обучения</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">8</div>
+      <div class="stat-label">Уроков</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">320</div>
+      <div class="stat-label">Минут</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">∞</div>
+      <div class="stat-label">Возможностей</div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="section" id="about">
+  <div class="section-header">
+    <div class="section-tag">О кружке</div>
+    <h2 class="section-title">Чему мы учим</h2>
+    <p class="section-desc">
+      Практический подход к изучению программирования через создание игр
+    </p>
+  </div>
+
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">🐍</div>
+      <h3 class="card-title">Python с нуля</h3>
+      <p class="card-text">
+        Основы Python: переменные, циклы, условия, функции. Всё объясняем простым языком с примерами из игр.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🎮</div>
+      <h3 class="card-title">Pygame разработка</h3>
+      <p class="card-text">
+        Создаём игры с графикой, звуком, управлением. От простых механик до полноценных проектов.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-icon">🚀</div>
+      <h3 class="card-title">Свои проекты</h3>
+      <p class="card-text">
+        Каждый ученик создаёт собственную игру и презентует её классу. Учимся работать самостоятельно.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- Courses Preview -->
+<section class="section">
+  <div class="section-header">
+    <div class="section-tag">Мини-курсы</div>
+    <h2 class="section-title">Наши программы</h2>
+    <p class="section-desc">
+      Интенсивные курсы с практикой и реальными проектами
+    </p>
+  </div>
+
+  <div class="courses-preview">
+    <a href="pygame-course.html" class="course-card">
+      <div class="course-number">01</div>
+      <div class="course-content">
+        <h3 class="course-title">Pygame Mini-Курс</h3>
+        <div class="course-meta">
+          <span class="course-meta-item">⏱ 4 дня · 8 уроков</span>
+          <span class="course-meta-item">📊 Уровень: Начинающий</span>
+          <span class="course-meta-item">🎯 Проект: Space Dodger</span>
+        </div>
+        <p class="course-desc">
+          За 4 дня создаём полноценную игру на Pygame. Изучаем графику, звук, коллизии, спрайты. Итог — своя игра с презентацией классу.
+        </p>
+      </div>
+    </a>
+
+    <!-- Можно добавить больше курсов -->
+  </div>
+</section>
+
+<!-- Footer -->
+<footer id="contact">
+  <div class="footer-content">
+    <div class="footer-logo">ШКОЛА №189</div>
+    <p class="footer-text">
+      Кружок программирования • Python + Pygame • 2025–2026
+    </p>
+    <ul class="footer-links">
+      <li><a href="courses.html">Курсы</a></li>
+      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="#about">О кружке</a></li>
+    </ul>
+    <div class="copyright">
+      © 2025 Школа №189. Все права защищены.
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
