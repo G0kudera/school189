@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Кружок программирования Школы №189 — учимся создавать игры на Python и Pygame. Практические курсы для школьников с нуля до собственного проекта.">
-<title>Кружок программирования — Школа №189</title>
+<meta name="description" content="Портфолио учителя информатики Школы №189 — методические разработки, задания и курсы по программированию на Python.">
+<title>Портфолио учителя — Школа №189</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐍</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -132,6 +132,11 @@ h1 {
   margin-bottom: 16px;
 }
 
+.section-tag--purple {
+  background: rgba(151,117,250,0.1);
+  color: var(--purple);
+}
+
 .section-title {
   font-size: clamp(32px, 5vw, 48px);
   font-weight: 800;
@@ -191,69 +196,72 @@ h1 {
   line-height: 1.7;
 }
 
-/* Courses Preview */
-.courses-preview {
+/* Materials List */
+.materials-list {
   display: grid;
-  gap: 32px;
+  gap: 20px;
 }
 
-.course-card {
-  background: linear-gradient(135deg, var(--surface), var(--card));
+.material-item {
+  background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 24px;
-  padding: 40px;
+  border-radius: 16px;
+  padding: 28px 32px;
   display: flex;
-  gap: 40px;
   align-items: center;
+  gap: 24px;
   transition: all 0.3s;
   text-decoration: none;
   color: inherit;
 }
 
-.course-card:hover {
-  transform: translateX(8px);
+.material-item:hover {
   border-color: var(--accent);
+  transform: translateX(8px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
 }
 
-.course-number {
-  font-size: 72px;
-  font-weight: 900;
-  background: linear-gradient(135deg, var(--accent), var(--gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
+.material-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
   flex-shrink: 0;
 }
 
-.course-content { flex: 1; }
+.material-icon--blue { background: rgba(79,124,255,0.15); }
+.material-icon--green { background: rgba(81,207,102,0.15); }
+.material-icon--gold { background: rgba(255,169,77,0.15); }
+.material-icon--purple { background: rgba(151,117,250,0.15); }
 
-.course-title {
-  font-size: 28px;
+.material-content { flex: 1; }
+
+.material-title {
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 12px;
+  margin-bottom: 4px;
 }
 
-.course-meta {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 16px;
-  flex-wrap: wrap;
-}
-
-.course-meta-item {
-  display: flex;
-  align-items: center;
-  gap: 8px;
+.material-desc {
   font-size: 14px;
   color: var(--text-dim);
-  font-weight: 600;
 }
 
-.course-desc {
-  color: var(--text-dim);
-  line-height: 1.8;
+.material-badge {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 100px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
 }
+
+.badge--course { background: rgba(79,124,255,0.15); color: var(--accent-bright); }
+.badge--task { background: rgba(81,207,102,0.15); color: var(--green); }
+.badge--material { background: rgba(255,169,77,0.15); color: var(--gold); }
 
 /* Animations */
 @keyframes fadeInUp {
@@ -273,13 +281,13 @@ h1             { animation-delay: 0.2s; }
   .hero { padding: 120px 20px 80px; }
   .section { padding: 80px 20px; }
 
-  .course-card {
+  .material-item {
     flex-direction: column;
     text-align: center;
-    padding: 32px 24px;
+    gap: 16px;
   }
 
-  .course-number { font-size: 56px; }
+  .material-badge { align-self: center; }
 }
 </style>
 </head>
@@ -293,9 +301,9 @@ h1             { animation-delay: 0.2s; }
       <span></span><span></span><span></span>
     </button>
     <ul class="nav-links">
-      <li><a href="#about">О кружке</a></li>
-      <li><a href="courses.html">Курсы</a></li>
-      <li><a href="projects.html">Проекты</a></li>
+      <li><a href="#about">Обо мне</a></li>
+      <li><a href="courses.html">Мои курсы</a></li>
+      <li><a href="projects.html">Проекты учеников</a></li>
       <li><a href="#contact">Контакты</a></li>
     </ul>
   </div>
@@ -305,36 +313,36 @@ h1             { animation-delay: 0.2s; }
 <section class="hero">
   <div class="hero-content">
     <div class="hero-badge">
-      🎓 Кружок программирования
+      🎓 Учитель информатики
     </div>
     <h1>
-      Создаём игры и учимся <span class="gradient-text">программировать</span>
+      Разработки и задания по <span class="gradient-text">программированию</span>
     </h1>
     <p class="hero-desc">
-      Практический курс по Python и разработке игр для школьников. От первых строк кода до собственных проектов.
+      Добро пожаловать на мой сайт! Здесь я публикую авторские курсы, методические разработки и практические задания по Python для школьников.
     </p>
     <div class="cta-buttons">
-      <a href="courses.html" class="btn btn-primary">Смотреть курсы</a>
-      <a href="projects.html" class="btn btn-secondary">Проекты учеников</a>
+      <a href="courses.html" class="btn btn-primary">Мои курсы</a>
+      <a href="#materials" class="btn btn-secondary">Разработки и задания</a>
     </div>
   </div>
 
   <div class="stats">
     <div class="stat-card">
-      <div class="stat-number">4</div>
-      <div class="stat-label">Дня обучения</div>
+      <div class="stat-number">2</div>
+      <div class="stat-label">Курса</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">8</div>
+      <div class="stat-number">18</div>
       <div class="stat-label">Уроков</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">320</div>
-      <div class="stat-label">Минут</div>
+      <div class="stat-number">8</div>
+      <div class="stat-label">Разработок</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">∞</div>
-      <div class="stat-label">Возможностей</div>
+      <div class="stat-number">Python</div>
+      <div class="stat-label">Основной язык</div>
     </div>
   </div>
 </section>
@@ -342,65 +350,104 @@ h1             { animation-delay: 0.2s; }
 <!-- About Section -->
 <section class="section" id="about">
   <div class="section-header">
-    <div class="section-tag">О кружке</div>
-    <h2 class="section-title">Чему мы учим</h2>
+    <div class="section-tag">Обо мне</div>
+    <h2 class="section-title">Чем я занимаюсь</h2>
     <p class="section-desc">
-      Практический подход к изучению программирования через создание игр
+      Разрабатываю учебные материалы и практические курсы по программированию для школьников
     </p>
   </div>
 
   <div class="cards-grid">
     <div class="card">
-      <div class="card-icon">🐍</div>
-      <h3 class="card-title">Python с нуля</h3>
+      <div class="card-icon">📝</div>
+      <h3 class="card-title">Авторские курсы</h3>
       <p class="card-text">
-        Основы Python: переменные, циклы, условия, функции. Всё объясняем простым языком с примерами из игр.
+        Создаю практические курсы по Python и Pygame. Каждый курс — от теории к реальному проекту, который ученик делает сам.
       </p>
     </div>
 
     <div class="card">
-      <div class="card-icon">🎮</div>
-      <h3 class="card-title">Pygame разработка</h3>
+      <div class="card-icon">📋</div>
+      <h3 class="card-title">Задания и материалы</h3>
       <p class="card-text">
-        Создаём игры с графикой, звуком, управлением. От простых механик до полноценных проектов.
+        Публикую задания разного уровня сложности, методические разработки и дополнительные материалы для уроков.
       </p>
     </div>
 
     <div class="card">
       <div class="card-icon">🚀</div>
-      <h3 class="card-title">Свои проекты</h3>
+      <h3 class="card-title">Проекты учеников</h3>
       <p class="card-text">
-        Каждый ученик создаёт собственную игру и презентует её классу. Учимся работать самостоятельно.
+        Мои ученики создают собственные игры и программы. Лучшие работы публикую на сайте как примеры.
       </p>
     </div>
   </div>
 </section>
 
-<!-- Courses Preview -->
-<section class="section">
+<!-- Materials & Tasks Section -->
+<section class="section" id="materials">
   <div class="section-header">
-    <div class="section-tag">Мини-курсы</div>
-    <h2 class="section-title">Наши программы</h2>
+    <div class="section-tag section-tag--purple">Материалы</div>
+    <h2 class="section-title">Разработки и задания</h2>
     <p class="section-desc">
-      Интенсивные курсы с практикой и реальными проектами
+      Методические материалы, практические задания и ресурсы для уроков
     </p>
   </div>
 
-  <div class="courses-preview">
-    <a href="pygame-course.html" class="course-card">
-      <div class="course-number">01</div>
-      <div class="course-content">
-        <h3 class="course-title">Pygame Mini-Курс</h3>
-        <div class="course-meta">
-          <span class="course-meta-item">⏱ 4 дня · 8 уроков</span>
-          <span class="course-meta-item">📊 Уровень: Начинающий</span>
-          <span class="course-meta-item">🎯 Проект: Space Dodger</span>
-        </div>
-        <p class="course-desc">
-          За 4 дня создаём полноценную игру на Pygame. Изучаем графику, звук, коллизии, спрайты. Итог — своя игра с презентацией классу.
-        </p>
+  <div class="materials-list">
+    <a href="pygame-course.html" class="material-item">
+      <div class="material-icon material-icon--blue">🎮</div>
+      <div class="material-content">
+        <div class="material-title">Pygame Mini-Курс: полная программа</div>
+        <div class="material-desc">4 дня, 8 уроков — от первого окна до готовой игры Space Dodger</div>
       </div>
+      <span class="material-badge badge--course">Курс</span>
     </a>
+
+    <div class="material-item">
+      <div class="material-icon material-icon--green">📝</div>
+      <div class="material-content">
+        <div class="material-title">Задания по основам Python</div>
+        <div class="material-desc">Переменные, циклы, условия, функции — набор практических упражнений</div>
+      </div>
+      <span class="material-badge badge--task">Задания</span>
+    </div>
+
+    <div class="material-item">
+      <div class="material-icon material-icon--gold">📐</div>
+      <div class="material-content">
+        <div class="material-title">Работа с графикой в Pygame</div>
+        <div class="material-desc">Рисование фигур, загрузка изображений, анимация спрайтов</div>
+      </div>
+      <span class="material-badge badge--material">Материал</span>
+    </div>
+
+    <div class="material-item">
+      <div class="material-icon material-icon--purple">🧩</div>
+      <div class="material-content">
+        <div class="material-title">Коллизии и игровая физика</div>
+        <div class="material-desc">Обнаружение столкновений, работа с Rect, базовая физика движения</div>
+      </div>
+      <span class="material-badge badge--material">Материал</span>
+    </div>
+
+    <div class="material-item">
+      <div class="material-icon material-icon--green">📝</div>
+      <div class="material-content">
+        <div class="material-title">Задания: создай свою игру</div>
+        <div class="material-desc">Самостоятельные проекты разного уровня сложности на Pygame</div>
+      </div>
+      <span class="material-badge badge--task">Задания</span>
+    </div>
+
+    <div class="material-item">
+      <div class="material-icon material-icon--blue">🤖</div>
+      <div class="material-content">
+        <div class="material-title">Telegram-боты: введение</div>
+        <div class="material-desc">Основы создания ботов на Python с aiogram — подготовительные материалы</div>
+      </div>
+      <span class="material-badge badge--material">Материал</span>
+    </div>
   </div>
 </section>
 
@@ -409,12 +456,12 @@ h1             { animation-delay: 0.2s; }
   <div class="footer-content">
     <div class="footer-logo">ШКОЛА №189</div>
     <p class="footer-text">
-      Кружок программирования • Python + Pygame • 2025–2026
+      Учитель информатики • Python + Pygame • 2025–2026
     </p>
     <ul class="footer-links">
-      <li><a href="courses.html">Курсы</a></li>
-      <li><a href="projects.html">Проекты</a></li>
-      <li><a href="#about">О кружке</a></li>
+      <li><a href="courses.html">Мои курсы</a></li>
+      <li><a href="projects.html">Проекты учеников</a></li>
+      <li><a href="#about">Обо мне</a></li>
     </ul>
     <div class="copyright">
       © 2025 Школа №189. Все права защищены.
